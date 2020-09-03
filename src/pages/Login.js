@@ -76,7 +76,9 @@ const Login = ({ getUserData }) => {
             onChange={handleChange}
             placeholder="Password"
           />
-          <Button colorButton="primary" widthButton={"large"}>Send</Button>
+          <Button colorButton="primary" widthButton={"large"}>
+            Send
+          </Button>
         </Form>
         {userData.error && userData.error && (
           <ErrorMessage>{userData.error}</ErrorMessage>

@@ -4,10 +4,11 @@ import { updateUserAction } from "../redux/actions/usersActions";
 import Styled from "styled-components";
 import { useParams, useHistory } from "react-router-dom";
 import { connect } from "react-redux";
+import Notifications from "../components/Notifications";
 
 const Form = Styled.form`
   width: 50%;
-  margin: 0 auto 50px;
+  margin: 0 auto;
   @media (max-width: 768px) {
     width: 100%;
   }
@@ -30,7 +31,12 @@ const Form = Styled.form`
 `;
 
 const EditProfile = ({ users, editUser, isFetching }) => {
-  const [userEdit, setUserEdit] = useState({});
+  const [showNotification, setShowNotification] = useState(false);
+  const [userEdit, setUserEdit] = useState({
+    first_name: "",
+    last_name: "",
+    email: "",
+  });
   const { id } = useParams();
   const history = useHistory();
   const getUserEdit = users.find((user, i) => user.id === Number(id));
@@ -40,10 +46,11 @@ const EditProfile = ({ users, editUser, isFetching }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     editUser(Number(id), userEdit, users);
+    setShowNotification(true);
     if (!isFetching) {
       setTimeout(() => {
         history.push(`/profile/${Number(id)}`);
-      }, 500);
+      }, 1500);
     }
   };
   const handleChange = (e) => {
@@ -52,8 +59,14 @@ const EditProfile = ({ users, editUser, isFetching }) => {
       [e.target.name]: e.target.value,
     });
   };
+  const handleShowNotification = () => {};
   return (
     <div className="container">
+      {showNotification && (
+        <Notifications handleShowNotification={handleShowNotification}>
+          Los datos se actualizaron correctamente
+        </Notifications>
+      )}
       <div className="row">
         <Form onSubmit={handleSubmit}>
           <input
@@ -78,10 +91,16 @@ const EditProfile = ({ users, editUser, isFetching }) => {
             value={`${userEdit.email}`}
           />
           <div className="container-button">
-              <Button widthButton="large" colorButton="secudary" href={`/profile/${Number(id)}`}>
+            <Button
+              widthButton="large"
+              colorButton="secudary"
+              href={`/profile/${Number(id)}`}
+            >
               Cancel
             </Button>
-            <Button widthButton="large" colorButton="primary">Update</Button>
+            <Button widthButton="large" colorButton="primary">
+              Update
+            </Button>
           </div>
         </Form>
       </div>
