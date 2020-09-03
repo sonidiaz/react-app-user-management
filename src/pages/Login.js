@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Button from "../components/Button";
 import Styled from "styled-components";
-import login from "../services/LoginUser";
+import login from "../services/loginUser";
 import { useHistory } from "react-router-dom";
 import { connect } from "react-redux";
 import { getUserAction } from "../redux/actions/userActions";
