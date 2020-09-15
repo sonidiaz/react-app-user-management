@@ -1,7 +1,7 @@
 
-# Prueba técnica de FrontEnd
+# Pequeña aplicación de prueba desarrollada en React
 
-Desarrollo de aplicación en React que gestiona una lista de usuarios obtenida de una API.
+Gestiona una lista de usuarios obtenida de una API.
 
 Clonar o descargar el repositorio.
 
